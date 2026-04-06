@@ -40,21 +40,19 @@
 
     <div class="filter-panel" id="filterPanel" aria-hidden="true">
       <div class="filter-group">
-        <span class="filter-label">Gender</span>
-        <div class="filter-chips">
-          <button class="chip active" data-filter="gender" data-value="all">All</button>
-          <button class="chip" data-filter="gender" data-value="male">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="14" r="5"/><line x1="14.47" y1="9.53" x2="20" y2="4"/><polyline points="16 4 20 4 20 8"/></svg>
-            Male
-          </button>
-          <button class="chip" data-filter="gender" data-value="female">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><line x1="12" y1="14" x2="12" y2="20"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
-            Female
-          </button>
-          <button class="chip" data-filter="gender" data-value="na">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
-            N/A
-          </button>
+        <div class="filter-chips" id="filterChips">
+          <button class="chip active" data-filter="tag" data-value="all">All</button>
+          <button class="chip" data-filter="tag" data-value="male">Male</button>
+          <button class="chip" data-filter="tag" data-value="female">Female</button>
+          <button class="chip" data-filter="tag" data-value="podcast">Podcast</button>
+          <button class="chip" data-filter="tag" data-value="art">Art</button>
+          <button class="chip" data-filter="tag" data-value="food">Food</button>
+          <button class="chip" data-filter="tag" data-value="sports">Sports</button>
+          <button class="chip" data-filter="tag" data-value="vlogs">Vlogs</button>
+          <button class="chip" data-filter="tag" data-value="news">News</button>
+          <button class="chip" data-filter="tag" data-value="music">Music</button>
+          <button class="chip" data-filter="tag" data-value="streamer">Streamer</button>
+          <button class="chip" data-filter="tag" data-value="trending">Trending 🔥</button>
         </div>
       </div>
     </div>
@@ -65,9 +63,9 @@
 
   <main class="feed" id="feed">
 
-    <!-- data-gender: male | female | na -->
+    <!-- data-tags: male | female | na -->
 
-    <article class="card" data-gender="male">
+    <article class="card" data-tags="male">
       <div class="video-wrap">
         <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@khaby.lame/video/6950627842518568197" data-video-id="6950627842518568197" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
@@ -77,7 +75,7 @@
       </div>
     </article>
 
-    <article class="card" data-gender="female">
+    <article class="card" data-tags="female vlogs">
       <div class="video-wrap">
         <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@charlidamelio/video/6880354156398398726" data-video-id="6880354156398398726" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
@@ -87,7 +85,7 @@
       </div>
     </article>
 
-    <article class="card" data-gender="male">
+    <article class="card" data-tags="male">
       <div class="video-wrap">
         <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@mrbeast/video/7505849400019717406" data-video-id="7505849400019717406" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
@@ -97,7 +95,7 @@
       </div>
     </article>
 
-    <article class="card" data-gender="na">
+    <article class="card" data-tags="na">
       <div class="video-wrap">
         <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@tiktok/video/7460937381265411370" data-video-id="7460937381265411370" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
@@ -107,7 +105,7 @@
       </div>
     </article>
 
-    <article class="card" data-gender="female">
+    <article class="card" data-tags="female">
       <div class="video-wrap">
         <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@bellapoarch/video/6862153058223197445" data-video-id="6862153058223197445" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
@@ -117,7 +115,7 @@
       </div>
     </article>
 
-    <article class="card" data-gender="female">
+    <article class="card" data-tags="female music">
       <div class="video-wrap">
         <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@addisonre/video/6863663621667392773" data-video-id="6863663621667392773" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
@@ -127,7 +125,7 @@
       </div>
     </article>
 
-    <article class="card" data-gender="male">
+    <article class="card" data-tags="male">
       <div class="video-wrap">
         <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@williesalim/video/7323561497798495494" data-video-id="7323561497798495494" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
@@ -137,7 +135,7 @@
       </div>
     </article>
 
-    <article class="card" data-gender="male">
+    <article class="card" data-tags="male">
       <div class="video-wrap">
         <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@zachking/video/6768504823336815877" data-video-id="6768504823336815877" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
@@ -147,7 +145,7 @@
       </div>
     </article>
 
-    <article class="card" data-gender="female">
+    <article class="card" data-tags="female">
       <div class="video-wrap">
         <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kimberly.loaiza/video/6947374598941969670" data-video-id="6947374598941969670" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
@@ -157,7 +155,7 @@
       </div>
     </article>
 
-    <article class="card" data-gender="male">
+    <article class="card" data-tags="male sports">
       <div class="video-wrap">
         <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@therock/video/7474681315955150126" data-video-id="7474681315955150126" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
@@ -167,7 +165,7 @@
       </div>
     </article>
 
-    <article class="card" data-gender="na">
+    <article class="card" data-tags="na">
       <div class="video-wrap">
         <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@bts_official_bighit/video/6863793267419516162" data-video-id="6863793267419516162" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
@@ -177,7 +175,7 @@
       </div>
     </article>
 
-    <article class="card" data-gender="male">
+    <article class="card" data-tags="male">
       <div class="video-wrap">
         <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@willsmith/video/7481699258819693870" data-video-id="7481699258819693870" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
@@ -187,7 +185,7 @@
       </div>
     </article>
 
-    <article class="card" data-gender="female">
+    <article class="card" data-tags="female">
       <div class="video-wrap">
         <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@domelipa/video/7421332186349030661" data-video-id="7421332186349030661" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
@@ -197,7 +195,7 @@
       </div>
     </article>
 
-    <article class="card" data-gender="female">
+    <article class="card" data-tags="female music">
       <div class="video-wrap">
         <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@billieeilish/video/6894081763379924229" data-video-id="6894081763379924229" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
@@ -207,7 +205,7 @@
       </div>
     </article>
 
-    <article class="card" data-gender="male">
+    <article class="card" data-tags="male">
       <div class="video-wrap">
         <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@cznburak/video/7120985110991604993" data-video-id="7120985110991604993" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
@@ -217,7 +215,7 @@
       </div>
     </article>
 
-    <article class="card" data-gender="na">
+    <article class="card" data-tags="na">
       <div class="video-wrap">
         <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@realmadrid/video/7567406620079312131" data-video-id="7567406620079312131" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
@@ -227,7 +225,7 @@
       </div>
     </article>
 
-    <article class="card" data-gender="female">
+    <article class="card" data-tags="female">
       <div class="video-wrap">
         <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@vilmeijuga/video/7383581144442277126" data-video-id="7383581144442277126" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
@@ -237,7 +235,7 @@
       </div>
     </article>
 
-    <article class="card" data-gender="male">
+    <article class="card" data-tags="male">
       <div class="video-wrap">
         <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@jasonderulo/video/6993829555089706245" data-video-id="6993829555089706245" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
@@ -247,7 +245,7 @@
       </div>
     </article>
 
-    <article class="card" data-gender="na">
+    <article class="card" data-tags="na">
       <div class="video-wrap">
         <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@fcbarcelona/video/7459185058595835168" data-video-id="7459185058595835168" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
@@ -257,7 +255,7 @@
       </div>
     </article>
 
-    <article class="card" data-gender="female">
+    <article class="card" data-tags="female">
       <div class="video-wrap">
         <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kyliejenner/video/6899569491613682949" data-video-id="6899569491613682949" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
@@ -267,7 +265,7 @@
       </div>
     </article>
 
-    <article class="card" data-gender="female">
+    <article class="card" data-tags="female">
       <div class="video-wrap">
         <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@selenagomez/video/6981894409453374725" data-video-id="6981894409453374725" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
@@ -277,7 +275,7 @@
       </div>
     </article>
 
-    <article class="card" data-gender="male">
+    <article class="card" data-tags="male">
       <div class="video-wrap">
         <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@youneszarou/video/7452774506478750998" data-video-id="7452774506478750998" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
@@ -287,7 +285,7 @@
       </div>
     </article>
 
-    <article class="card" data-gender="na">
+    <article class="card" data-tags="na">
       <div class="video-wrap">
         <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@espn/video/7471797865883405598" data-video-id="7471797865883405598" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
@@ -297,7 +295,7 @@
       </div>
     </article>
 
-    <article class="card" data-gender="male">
+    <article class="card" data-tags="male">
       <div class="video-wrap">
         <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@omari.to/video/7519919861775043896" data-video-id="7519919861775043896" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
@@ -307,7 +305,7 @@
       </div>
     </article>
 
-    <article class="card" data-gender="na">
+    <article class="card" data-tags="sports">
       <div class="video-wrap">
         <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@championsleague/video/7161855197608758534" data-video-id="7161855197608758534" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
@@ -349,7 +347,6 @@
     })();
 
     // filter
-    const state = { gender: 'all' };
     const toggleBtn = document.getElementById('filterToggle');
     const panel     = document.getElementById('filterPanel');
 
@@ -371,11 +368,20 @@
       });
     });
 
+    const state = { tag: 'all' };
+
     function applyFilters() {
       const cards = document.querySelectorAll('#feed .card');
       let visible = 0;
       cards.forEach(function (card) {
-        const match = state.gender === 'all' || card.dataset.gender === state.gender;
+        let match = false;
+        if (state.tag === 'all') {
+          match = true;
+        } else {
+          const tags = card.dataset.tags ? card.dataset.tags.split(' ') : [];
+          match = tags.includes(state.tag);
+        }
+        
         card.style.display = match ? '' : 'none';
         if (match) {
           card.style.animationDelay = (visible * 0.035) + 's';
@@ -387,12 +393,11 @@
       });
       document.getElementById('emptyState').classList.toggle('visible', visible === 0);
       const s = document.getElementById('filterStatus');
-      if (state.gender === 'all') {
+      if (state.tag === 'all') {
         s.classList.remove('visible');
         s.textContent = '';
       } else {
-        const map = { male: 'Male', female: 'Female', na: 'N/A' };
-        s.textContent = map[state.gender] + ' · ' + visible + ' creator' + (visible !== 1 ? 's' : '');
+        s.textContent = state.tag.charAt(0).toUpperCase() + state.tag.slice(1) + ' · ' + visible + ' creator' + (visible !== 1 ? 's' : '');
         s.classList.add('visible');
       }
     }
