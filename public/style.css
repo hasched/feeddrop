@@ -1,0 +1,299 @@
+/* ── RESET ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── TOKENS ── */
+:root {
+  --bg:         #080808;
+  --surface:    #0f0f0f;
+  --card-bg:    #111;
+  --border:     rgba(255,255,255,0.06);
+  --accent:     #ff2d55;
+  --accent2:    #00e5ff;
+  --text:       #f2f2f2;
+  --muted:      #555;
+  --glow-pink:  rgba(255, 45, 85, 0.18);
+  --glow-cyan:  rgba(0, 229, 255, 0.14);
+
+  /* TikTok embed white footer height to clip — approx 195px */
+  --clip-bottom: 195px;
+}
+
+/* ── BASE ── */
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Syne', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── GRAIN OVERLAY ── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.03;
+}
+
+/* ── AMBIENT BLOBS ── */
+.blob {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 0;
+  animation: drift 18s ease-in-out infinite alternate;
+}
+.blob-1 {
+  width: 600px; height: 600px;
+  background: var(--glow-pink);
+  top: -200px; left: -150px;
+  animation-delay: 0s;
+}
+.blob-2 {
+  width: 500px; height: 500px;
+  background: var(--glow-cyan);
+  bottom: -150px; right: -100px;
+  animation-delay: -6s;
+}
+@keyframes drift {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(60px, 40px) scale(1.1); }
+}
+
+/* ── HEADER ── */
+header {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(24px, 4vw, 56px) clamp(16px, 4vw, 64px) 0;
+  gap: 16px;
+}
+
+.logo-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(42px, 6vw, 90px);
+  letter-spacing: 0.06em;
+  line-height: 1;
+  background: linear-gradient(120deg, #fff 0%, var(--accent) 60%, var(--accent2) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.tagline {
+  font-size: clamp(9px, 1vw, 12px);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.badge {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 14px;
+  backdrop-filter: blur(8px);
+}
+
+/* ── RULE ── */
+.rule {
+  position: relative;
+  z-index: 10;
+  margin: clamp(16px, 2.5vw, 32px) clamp(16px, 4vw, 64px) 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2) 50%, transparent);
+  opacity: 0.3;
+}
+
+/* ── FEED GRID ── */
+.feed {
+  position: relative;
+  z-index: 10;
+  display: grid;
+
+  /*
+    Fluid columns:
+    - Ultra-wide (G9, 5120px): fills ~8–10 columns naturally
+    - 27" 2K:  ~5–6 columns
+    - 15" FHD: ~3–4 columns
+    - Tablet:  ~2–3 columns
+    - Mobile:  1 column
+  */
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: clamp(12px, 1.5vw, 28px);
+  padding: clamp(24px, 3vw, 48px) clamp(16px, 4vw, 64px) 100px;
+  max-width: 100%;
+}
+
+/* ── CARD ── */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1),
+              box-shadow 0.3s cubic-bezier(0.23, 1, 0.32, 1),
+              border-color 0.3s ease;
+
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.55s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.card:hover {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.6),
+    0 0 0 1px rgba(255,255,255,0.08),
+    0 0 40px var(--glow-pink);
+  border-color: rgba(255, 45, 85, 0.3);
+}
+
+/* Stagger */
+.card:nth-child(1)  { animation-delay: 0.04s; }
+.card:nth-child(2)  { animation-delay: 0.08s; }
+.card:nth-child(3)  { animation-delay: 0.12s; }
+.card:nth-child(4)  { animation-delay: 0.16s; }
+.card:nth-child(5)  { animation-delay: 0.20s; }
+.card:nth-child(6)  { animation-delay: 0.24s; }
+.card:nth-child(7)  { animation-delay: 0.28s; }
+.card:nth-child(8)  { animation-delay: 0.32s; }
+.card:nth-child(9)  { animation-delay: 0.36s; }
+.card:nth-child(10) { animation-delay: 0.40s; }
+.card:nth-child(11) { animation-delay: 0.44s; }
+.card:nth-child(12) { animation-delay: 0.48s; }
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── VIDEO CLIP WRAPPER ─────────────────────────────────────────────────────
+   TikTok embeds render as an iframe ~741px tall.
+   The bottom ~195px is the white info panel (handle, caption, song).
+   We crop it by setting a fixed height and hiding overflow.
+   The iframe inside is position:absolute so we contain it.
+─────────────────────────────────────────────────────────────────────────── */
+.video-wrap {
+  position: relative;
+  width: 100%;
+  /* 9:16 ratio container for the visible video portion only */
+  /* Full embed height ≈ 741px at 325px wide (2.28:1 ratio) */
+  /* We remove the ~195px white footer → visible ratio ≈ 546/325 = 1.68:1 */
+  aspect-ratio: 9 / 15.2;
+  overflow: hidden;
+  background: #000;
+  border-radius: 16px 16px 0 0;
+}
+
+/* The TikTok blockquote/iframe sits here. We push it up to hide the footer. */
+.video-wrap > blockquote,
+.video-wrap > iframe {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: calc(100% + var(--clip-bottom)) !important;
+  margin: 0 !important;
+  border: none !important;
+}
+
+/* ── CARD META ── */
+.card-meta {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: var(--card-bg);
+  border-top: 1px solid var(--border);
+}
+
+.video-title {
+  font-size: clamp(12px, 1.1vw, 14px);
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.handle {
+  font-size: clamp(11px, 0.9vw, 13px);
+  font-weight: 400;
+  color: var(--accent);
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  width: fit-content;
+}
+.handle:hover { color: var(--accent2); }
+
+/* ── FOOTER ── */
+footer {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 28px 40px 40px;
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ── RESPONSIVE FINE-TUNING ── */
+
+/* Large monitors / ultrawide — allow more columns, tighter gap */
+@media (min-width: 2560px) {
+  .feed {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .feed {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 20px 10px 80px;
+  }
+  header { padding: 20px 16px 0; }
+  .rule  { margin: 14px 16px 0; }
+  .badge { display: none; }
+  .card-meta { padding: 10px 12px 12px; }
+}
+
+/* Very small mobile — single column */
+@media (max-width: 340px) {
+  .feed { grid-template-columns: 1fr; }
+}
