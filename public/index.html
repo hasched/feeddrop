@@ -30,17 +30,46 @@
 
   <div class="rule" aria-hidden="true"></div>
 
+  <!-- ── FILTER BAR ── -->
+  <div class="filter-bar">
+    <button class="filter-toggle" id="filterToggle" aria-expanded="false" aria-controls="filterPanel">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
+      <span>Filter</span>
+      <svg class="chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+
+    <div class="filter-panel" id="filterPanel" aria-hidden="true">
+      <div class="filter-group">
+        <span class="filter-label">Gender</span>
+        <div class="filter-chips">
+          <button class="chip active" data-filter="gender" data-value="all">All</button>
+          <button class="chip" data-filter="gender" data-value="male">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="14" r="5"/><line x1="14.47" y1="9.53" x2="20" y2="4"/><polyline points="16 4 20 4 20 8"/></svg>
+            Male
+          </button>
+          <button class="chip" data-filter="gender" data-value="female">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><line x1="12" y1="14" x2="12" y2="20"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
+            Female
+          </button>
+          <button class="chip" data-filter="gender" data-value="na">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+            N/A
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Active filter pill -->
+  <div class="filter-status" id="filterStatus"></div>
+
   <main class="feed" id="feed">
 
-    <!-- ── 1 ── -->
-    <article class="card">
+    <!-- data-gender: male | female | na -->
+
+    <article class="card" data-gender="male">
       <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@khaby.lame/video/6950627842518568197"
-          data-video-id="6950627842518568197"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
+        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@khaby.lame/video/6950627842518568197" data-video-id="6950627842518568197" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
       <div class="card-meta">
         <span class="video-title">Khaby Lame</span>
@@ -48,15 +77,9 @@
       </div>
     </article>
 
-    <!-- ── 2 ── -->
-    <article class="card">
+    <article class="card" data-gender="female">
       <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@charlidamelio/video/6880354156398398726"
-          data-video-id="6880354156398398726"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
+        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@charlidamelio/video/6880354156398398726" data-video-id="6880354156398398726" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
       <div class="card-meta">
         <span class="video-title">Charli Damelio</span>
@@ -64,15 +87,9 @@
       </div>
     </article>
 
-    <!-- ── 3 ── -->
-    <article class="card">
+    <article class="card" data-gender="male">
       <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@mrbeast/video/7505849400019717406"
-          data-video-id="7505849400019717406"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
+        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@mrbeast/video/7505849400019717406" data-video-id="7505849400019717406" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
       <div class="card-meta">
         <span class="video-title">Mr Beast</span>
@@ -80,15 +97,9 @@
       </div>
     </article>
 
-    <!-- ── 4 ── -->
-    <article class="card">
+    <article class="card" data-gender="na">
       <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@tiktok/video/7460937381265411370"
-          data-video-id="7460937381265411370"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
+        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@tiktok/video/7460937381265411370" data-video-id="7460937381265411370" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
       <div class="card-meta">
         <span class="video-title">TikTok</span>
@@ -96,31 +107,19 @@
       </div>
     </article>
 
-    <!-- ── 5 ── -->
-    <article class="card">
+    <article class="card" data-gender="female">
       <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@bellapoarch/video/6862153058223197445"
-          data-video-id="6862153058223197445"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
+        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@bellapoarch/video/6862153058223197445" data-video-id="6862153058223197445" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
       <div class="card-meta">
-        <span class="video-title">Bella Parch</span>
+        <span class="video-title">Bella Poarch</span>
         <a class="handle" href="https://www.tiktok.com/@bellapoarch" target="_blank" rel="noopener">@bellapoarch</a>
       </div>
     </article>
 
-    <!-- ── 6 ── -->
-    <article class="card">
+    <article class="card" data-gender="female">
       <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@addisonre/video/6863663621667392773"
-          data-video-id="6863663621667392773"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
+        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@addisonre/video/6863663621667392773" data-video-id="6863663621667392773" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
       <div class="card-meta">
         <span class="video-title">Addison Rae</span>
@@ -128,15 +127,9 @@
       </div>
     </article>
 
-    <!-- ── 7 ── -->
-    <article class="card">
+    <article class="card" data-gender="male">
       <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@williesalim/video/7323561497798495494"
-          data-video-id="7323561497798495494"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
+        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@williesalim/video/7323561497798495494" data-video-id="7323561497798495494" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
       <div class="card-meta">
         <span class="video-title">Willie Salim</span>
@@ -144,31 +137,19 @@
       </div>
     </article>
 
-    <!-- ── 8 ── -->
-    <article class="card">
+    <article class="card" data-gender="male">
       <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@zachking/video/6768504823336815877"
-          data-video-id="6768504823336815877"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
+        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@zachking/video/6768504823336815877" data-video-id="6768504823336815877" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
       <div class="card-meta">
-        <span class="video-title">Fresh Prince energy never gets old</span>
+        <span class="video-title">Zach King</span>
         <a class="handle" href="https://www.tiktok.com/@zachking" target="_blank" rel="noopener">@zachking</a>
       </div>
     </article>
 
-    <!-- ── 9 ── -->
-    <article class="card">
+    <article class="card" data-gender="female">
       <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@kimberly.loaiza/video/6947374598941969670"
-          data-video-id="6947374598941969670"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
+        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kimberly.loaiza/video/6947374598941969670" data-video-id="6947374598941969670" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
       <div class="card-meta">
         <span class="video-title">Kimberly Loaiza</span>
@@ -176,15 +157,9 @@
       </div>
     </article>
 
-        <!-- ── 10 ── -->
-    <article class="card">
+    <article class="card" data-gender="male">
       <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@therock/video/7474681315955150126"
-          data-video-id="7474681315955150126"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
+        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@therock/video/7474681315955150126" data-video-id="7474681315955150126" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
       <div class="card-meta">
         <span class="video-title">The Rock</span>
@@ -192,15 +167,9 @@
       </div>
     </article>
 
-        <!-- ── 11 ── -->
-    <article class="card">
+    <article class="card" data-gender="na">
       <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@bts_official_bighit/video/6863793267419516162"
-          data-video-id="6863793267419516162"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
+        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@bts_official_bighit/video/6863793267419516162" data-video-id="6863793267419516162" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
       <div class="card-meta">
         <span class="video-title">BTS</span>
@@ -208,15 +177,9 @@
       </div>
     </article>
 
-        <!-- ── 12 ── -->
-    <article class="card">
+    <article class="card" data-gender="male">
       <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@willsmith/video/7481699258819693870"
-          data-video-id="7481699258819693870"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
+        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@willsmith/video/7481699258819693870" data-video-id="7481699258819693870" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
       <div class="card-meta">
         <span class="video-title">Will Smith</span>
@@ -224,63 +187,39 @@
       </div>
     </article>
 
-        <!-- ── 13 ── -->
-    <article class="card">
+    <article class="card" data-gender="female">
       <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@domelipa/video/7421332186349030661"
-          data-video-id="7421332186349030661"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
+        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@domelipa/video/7421332186349030661" data-video-id="7421332186349030661" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
       <div class="card-meta">
-        <span class="video-title">domelipa</span>
+        <span class="video-title">Domelipa</span>
         <a class="handle" href="https://www.tiktok.com/@domelipa" target="_blank" rel="noopener">@domelipa</a>
       </div>
     </article>
 
-        <!-- ── 14 ── -->
-    <article class="card">
+    <article class="card" data-gender="female">
       <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@billieeilish/video/6894081763379924229"
-          data-video-id="6894081763379924229"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
+        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@billieeilish/video/6894081763379924229" data-video-id="6894081763379924229" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
       <div class="card-meta">
-        <span class="video-title">BILLIE EILISH</span>
+        <span class="video-title">Billie Eilish</span>
         <a class="handle" href="https://www.tiktok.com/@billieeilish" target="_blank" rel="noopener">@billieeilish</a>
       </div>
     </article>
 
-        <!-- ── 15 ── -->
-    <article class="card">
+    <article class="card" data-gender="male">
       <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@cznburak/video/7120985110991604993"
-          data-video-id="7120985110991604993"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
+        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@cznburak/video/7120985110991604993" data-video-id="7120985110991604993" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
       <div class="card-meta">
-        <span class="video-title">cznburak</span>
+        <span class="video-title">CZN Burak</span>
         <a class="handle" href="https://www.tiktok.com/@cznburak" target="_blank" rel="noopener">@cznburak</a>
       </div>
     </article>
 
-        <!-- ── 16 ── -->
-    <article class="card">
+    <article class="card" data-gender="na">
       <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@realmadrid/video/7567406620079312131"
-          data-video-id="7567406620079312131"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
+        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@realmadrid/video/7567406620079312131" data-video-id="7567406620079312131" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
       <div class="card-meta">
         <span class="video-title">Real Madrid</span>
@@ -288,15 +227,9 @@
       </div>
     </article>
 
-        <!-- ── 17 ── -->
-    <article class="card">
+    <article class="card" data-gender="female">
       <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@vilmeijuga/video/7383581144442277126"
-          data-video-id="7383581144442277126"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
+        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@vilmeijuga/video/7383581144442277126" data-video-id="7383581144442277126" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
       <div class="card-meta">
         <span class="video-title">VILMEI 🌟</span>
@@ -304,15 +237,9 @@
       </div>
     </article>
 
-        <!-- ── 18 ── -->
-    <article class="card">
+    <article class="card" data-gender="male">
       <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@jasonderulo/video/6993829555089706245"
-          data-video-id="6993829555089706245"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
+        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@jasonderulo/video/6993829555089706245" data-video-id="6993829555089706245" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
       <div class="card-meta">
         <span class="video-title">Jason Derulo</span>
@@ -320,31 +247,19 @@
       </div>
     </article>
 
-        <!-- ── 19 ── -->
-    <article class="card">
+    <article class="card" data-gender="na">
       <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@fcbarcelona/video/7459185058595835168"
-          data-video-id="7459185058595835168"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
+        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@fcbarcelona/video/7459185058595835168" data-video-id="7459185058595835168" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
       <div class="card-meta">
-        <span class="video-title">fcbarcelona</span>
+        <span class="video-title">FC Barcelona</span>
         <a class="handle" href="https://www.tiktok.com/@fcbarcelona" target="_blank" rel="noopener">@fcbarcelona</a>
       </div>
     </article>
 
-        <!-- ── 20 ── -->
-    <article class="card">
+    <article class="card" data-gender="female">
       <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@kyliejenner/video/6899569491613682949"
-          data-video-id="6899569491613682949"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
+        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kyliejenner/video/6899569491613682949" data-video-id="6899569491613682949" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
       <div class="card-meta">
         <span class="video-title">Kylie Jenner</span>
@@ -352,15 +267,9 @@
       </div>
     </article>
 
-    <!-- ── 21 ── -->
-    <article class="card">
+    <article class="card" data-gender="female">
       <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@selenagomez/video/6981894409453374725"
-          data-video-id="6981894409453374725"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
+        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@selenagomez/video/6981894409453374725" data-video-id="6981894409453374725" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
       <div class="card-meta">
         <span class="video-title">Selena Gomez</span>
@@ -368,400 +277,60 @@
       </div>
     </article>
 
-    <!-- ── 4 ── -->
-    <article class="card">
+    <article class="card" data-gender="male">
       <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@youneszarou/video/7452774506478750998"
-          data-video-id="7452774506478750998"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
+        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@youneszarou/video/7452774506478750998" data-video-id="7452774506478750998" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
       <div class="card-meta">
-        <span class="video-title">YZ</span>
+        <span class="video-title">Younes Zarou</span>
         <a class="handle" href="https://www.tiktok.com/@youneszarou" target="_blank" rel="noopener">@youneszarou</a>
       </div>
     </article>
 
-    <!-- ── 4 ── -->
-    <article class="card">
+    <article class="card" data-gender="na">
       <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@espn/video/7471797865883405598"
-          data-video-id="7471797865883405598"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
+        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@espn/video/7471797865883405598" data-video-id="7471797865883405598" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
       <div class="card-meta">
-        <span class="video-title">espn</span>
+        <span class="video-title">ESPN</span>
         <a class="handle" href="https://www.tiktok.com/@espn" target="_blank" rel="noopener">@espn</a>
       </div>
     </article>
 
-    <!-- ── 4 ── -->
-    <article class="card">
+    <article class="card" data-gender="male">
       <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@omari.to/video/7519919861775043896"
-          data-video-id="7519919861775043896"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
+        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@omari.to/video/7519919861775043896" data-video-id="7519919861775043896" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
       <div class="card-meta">
-        <span class="video-title">omari.to</span>
+        <span class="video-title">Omari</span>
         <a class="handle" href="https://www.tiktok.com/@omari.to" target="_blank" rel="noopener">@omari.to</a>
       </div>
     </article>
 
-    <!-- ── 4 ── -->
-    <article class="card">
+    <article class="card" data-gender="na">
       <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@championsleague/video/7161855197608758534"
-          data-video-id="7161855197608758534"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
+        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@championsleague/video/7161855197608758534" data-video-id="7161855197608758534" style="max-width:605px;min-width:325px;"><section></section></blockquote>
       </div>
       <div class="card-meta">
-        <span class="video-title">championsleague</span>
+        <span class="video-title">Champions League</span>
         <a class="handle" href="https://www.tiktok.com/@championsleague" target="_blank" rel="noopener">@championsleague</a>
       </div>
     </article>
 
-    <!-- ── 4 ── -->
-    <article class="card">
-      <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@tiktok/video/7460937381265411370"
-          data-video-id="7460937381265411370"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
-      </div>
-      <div class="card-meta">
-        <span class="video-title">TikTok</span>
-        <a class="handle" href="https://www.tiktok.com/@tiktok" target="_blank" rel="noopener">@tiktok</a>
-      </div>
-    </article>
-
-    <!-- ── 4 ── -->
-    <article class="card">
-      <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@tiktok/video/7460937381265411370"
-          data-video-id="7460937381265411370"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
-      </div>
-      <div class="card-meta">
-        <span class="video-title">TikTok</span>
-        <a class="handle" href="https://www.tiktok.com/@tiktok" target="_blank" rel="noopener">@tiktok</a>
-      </div>
-    </article>
-
-    <!-- ── 4 ── -->
-    <article class="card">
-      <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@tiktok/video/7460937381265411370"
-          data-video-id="7460937381265411370"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
-      </div>
-      <div class="card-meta">
-        <span class="video-title">TikTok</span>
-        <a class="handle" href="https://www.tiktok.com/@tiktok" target="_blank" rel="noopener">@tiktok</a>
-      </div>
-    </article>
-
-    <!-- ── 4 ── -->
-    <article class="card">
-      <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@tiktok/video/7460937381265411370"
-          data-video-id="7460937381265411370"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
-      </div>
-      <div class="card-meta">
-        <span class="video-title">TikTok</span>
-        <a class="handle" href="https://www.tiktok.com/@tiktok" target="_blank" rel="noopener">@tiktok</a>
-      </div>
-    </article>
-
-    <!-- ── 4 ── -->
-    <article class="card">
-      <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@tiktok/video/7460937381265411370"
-          data-video-id="7460937381265411370"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
-      </div>
-      <div class="card-meta">
-        <span class="video-title">TikTok</span>
-        <a class="handle" href="https://www.tiktok.com/@tiktok" target="_blank" rel="noopener">@tiktok</a>
-      </div>
-    </article>
-
-    <!-- ── 4 ── -->
-    <article class="card">
-      <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@tiktok/video/7460937381265411370"
-          data-video-id="7460937381265411370"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
-      </div>
-      <div class="card-meta">
-        <span class="video-title">TikTok</span>
-        <a class="handle" href="https://www.tiktok.com/@tiktok" target="_blank" rel="noopener">@tiktok</a>
-      </div>
-    </article>
-
-    <!-- ── 4 ── -->
-    <article class="card">
-      <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@tiktok/video/7460937381265411370"
-          data-video-id="7460937381265411370"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
-      </div>
-      <div class="card-meta">
-        <span class="video-title">TikTok</span>
-        <a class="handle" href="https://www.tiktok.com/@tiktok" target="_blank" rel="noopener">@tiktok</a>
-      </div>
-    </article>
-
-    <!-- ── 4 ── -->
-    <article class="card">
-      <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@tiktok/video/7460937381265411370"
-          data-video-id="7460937381265411370"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
-      </div>
-      <div class="card-meta">
-        <span class="video-title">TikTok</span>
-        <a class="handle" href="https://www.tiktok.com/@tiktok" target="_blank" rel="noopener">@tiktok</a>
-      </div>
-    </article>
-
-    <!-- ── 4 ── -->
-    <article class="card">
-      <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@tiktok/video/7460937381265411370"
-          data-video-id="7460937381265411370"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
-      </div>
-      <div class="card-meta">
-        <span class="video-title">TikTok</span>
-        <a class="handle" href="https://www.tiktok.com/@tiktok" target="_blank" rel="noopener">@tiktok</a>
-      </div>
-    </article>
-
-    <!-- ── 4 ── -->
-    <article class="card">
-      <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@tiktok/video/7460937381265411370"
-          data-video-id="7460937381265411370"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
-      </div>
-      <div class="card-meta">
-        <span class="video-title">TikTok</span>
-        <a class="handle" href="https://www.tiktok.com/@tiktok" target="_blank" rel="noopener">@tiktok</a>
-      </div>
-    </article>
-
-    <!-- ── 4 ── -->
-    <article class="card">
-      <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@tiktok/video/7460937381265411370"
-          data-video-id="7460937381265411370"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
-      </div>
-      <div class="card-meta">
-        <span class="video-title">TikTok</span>
-        <a class="handle" href="https://www.tiktok.com/@tiktok" target="_blank" rel="noopener">@tiktok</a>
-      </div>
-    </article>
-
-    <!-- ── 4 ── -->
-    <article class="card">
-      <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@tiktok/video/7460937381265411370"
-          data-video-id="7460937381265411370"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
-      </div>
-      <div class="card-meta">
-        <span class="video-title">TikTok</span>
-        <a class="handle" href="https://www.tiktok.com/@tiktok" target="_blank" rel="noopener">@tiktok</a>
-      </div>
-    </article>
-
-    <!-- ── 4 ── -->
-    <article class="card">
-      <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@tiktok/video/7460937381265411370"
-          data-video-id="7460937381265411370"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
-      </div>
-      <div class="card-meta">
-        <span class="video-title">TikTok</span>
-        <a class="handle" href="https://www.tiktok.com/@tiktok" target="_blank" rel="noopener">@tiktok</a>
-      </div>
-    </article>
-
-    <!-- ── 4 ── -->
-    <article class="card">
-      <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@tiktok/video/7460937381265411370"
-          data-video-id="7460937381265411370"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
-      </div>
-      <div class="card-meta">
-        <span class="video-title">TikTok</span>
-        <a class="handle" href="https://www.tiktok.com/@tiktok" target="_blank" rel="noopener">@tiktok</a>
-      </div>
-    </article>
-
-    <!-- ── 4 ── -->
-    <article class="card">
-      <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@tiktok/video/7460937381265411370"
-          data-video-id="7460937381265411370"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
-      </div>
-      <div class="card-meta">
-        <span class="video-title">TikTok</span>
-        <a class="handle" href="https://www.tiktok.com/@tiktok" target="_blank" rel="noopener">@tiktok</a>
-      </div>
-    </article>
-
-    <!-- ── 4 ── -->
-    <article class="card">
-      <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@tiktok/video/7460937381265411370"
-          data-video-id="7460937381265411370"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
-      </div>
-      <div class="card-meta">
-        <span class="video-title">TikTok</span>
-        <a class="handle" href="https://www.tiktok.com/@tiktok" target="_blank" rel="noopener">@tiktok</a>
-      </div>
-    </article>
-
-    <!-- ── 4 ── -->
-    <article class="card">
-      <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@tiktok/video/7460937381265411370"
-          data-video-id="7460937381265411370"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
-      </div>
-      <div class="card-meta">
-        <span class="video-title">TikTok</span>
-        <a class="handle" href="https://www.tiktok.com/@tiktok" target="_blank" rel="noopener">@tiktok</a>
-      </div>
-    </article>
-
-    <!-- ── 4 ── -->
-    <article class="card">
-      <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@tiktok/video/7460937381265411370"
-          data-video-id="7460937381265411370"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
-      </div>
-      <div class="card-meta">
-        <span class="video-title">TikTok</span>
-        <a class="handle" href="https://www.tiktok.com/@tiktok" target="_blank" rel="noopener">@tiktok</a>
-      </div>
-    </article>
-
-    <!-- ── 4 ── -->
-    <article class="card">
-      <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@tiktok/video/7460937381265411370"
-          data-video-id="7460937381265411370"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
-      </div>
-      <div class="card-meta">
-        <span class="video-title">TikTok</span>
-        <a class="handle" href="https://www.tiktok.com/@tiktok" target="_blank" rel="noopener">@tiktok</a>
-      </div>
-    </article>
-
-    <!-- ── 4 ── -->
-    <article class="card">
-      <div class="video-wrap">
-        <blockquote class="tiktok-embed"
-          cite="https://www.tiktok.com/@tiktok/video/7460937381265411370"
-          data-video-id="7460937381265411370"
-          style="max-width:605px;min-width:325px;">
-          <section></section>
-        </blockquote>
-      </div>
-      <div class="card-meta">
-        <span class="video-title">TikTok</span>
-        <a class="handle" href="https://www.tiktok.com/@tiktok" target="_blank" rel="noopener">@tiktok</a>
-      </div>
-    </article>
-
-
   </main>
+
+  <!-- Empty state -->
+  <div class="empty-state" id="emptyState">
+    <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+    <p>No creators match this filter.</p>
+    <button class="reset-btn" onclick="resetFilters()">Clear filters</button>
+  </div>
 
   <footer>FeedDrop &mdash; &copy; 2025</footer>
 
   <script async src="https://www.tiktok.com/embed.js"></script>
-
   <script>
-    // After TikTok injects iframes, strip their inline styles so our CSS controls sizing.
-    // This lets overflow:hidden on .video-wrap clip the white info panel.
+    // iframe fix
     (function () {
       function fixIframes() {
         document.querySelectorAll('.video-wrap iframe').forEach(function (el) {
@@ -778,7 +347,59 @@
         setTimeout(fixIframes, 4000);
       });
     })();
-  </script>
 
+    // filter
+    const state = { gender: 'all' };
+    const toggleBtn = document.getElementById('filterToggle');
+    const panel     = document.getElementById('filterPanel');
+
+    toggleBtn.addEventListener('click', function () {
+      const open = panel.classList.toggle('open');
+      toggleBtn.setAttribute('aria-expanded', String(open));
+      toggleBtn.classList.toggle('active', open);
+    });
+
+    document.querySelectorAll('.chip').forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        const f = chip.dataset.filter;
+        const v = chip.dataset.value;
+        state[f] = v;
+        document.querySelectorAll('.chip[data-filter="' + f + '"]').forEach(function (c) {
+          c.classList.toggle('active', c.dataset.value === v);
+        });
+        applyFilters();
+      });
+    });
+
+    function applyFilters() {
+      const cards = document.querySelectorAll('#feed .card');
+      let visible = 0;
+      cards.forEach(function (card) {
+        const match = state.gender === 'all' || card.dataset.gender === state.gender;
+        card.style.display = match ? '' : 'none';
+        if (match) {
+          card.style.animationDelay = (visible * 0.035) + 's';
+          card.classList.remove('pop');
+          void card.offsetWidth;
+          card.classList.add('pop');
+          visible++;
+        }
+      });
+      document.getElementById('emptyState').classList.toggle('visible', visible === 0);
+      const s = document.getElementById('filterStatus');
+      if (state.gender === 'all') {
+        s.classList.remove('visible');
+        s.textContent = '';
+      } else {
+        const map = { male: 'Male', female: 'Female', na: 'N/A' };
+        s.textContent = map[state.gender] + ' · ' + visible + ' creator' + (visible !== 1 ? 's' : '');
+        s.classList.add('visible');
+      }
+    }
+
+    function resetFilters() {
+      document.querySelector('.chip[data-value="all"]').click();
+    }
+  </script>
 </body>
 </html>
