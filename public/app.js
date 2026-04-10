@@ -46,42 +46,31 @@ function renderBatch() {
   feed.appendChild(frag);
   rendered = end;
   loading  = false;
-
-  // Re-run TikTok's embed renderer for the newly added blockquotes.
-  // TikTok's script only auto-processes blockquotes present at load time.
-  // For lazy-loaded ones we must either call their API or reload the script.
-  triggerTikTokRender();
-}
-
-function triggerTikTokRender() {
-  // Method 1: use their JS API if available
-  if (window.tiktokEmbed && typeof window.tiktokEmbed.lib === 'object') {
-    try { window.tiktokEmbed.lib.render(); return; } catch(e) {}
-  }
-  // Method 2: remove & re-inject the script tag (forces a re-scan of the DOM)
-  const old = document.querySelector('script[src*="tiktok.com/embed.js"]');
-  if (old) old.remove();
-  const s = document.createElement('script');
-  s.src = 'https://www.tiktok.com/embed.js';
-  s.async = true;
-  document.body.appendChild(s);
 }
 
 // ── Build a single card DOM node ───────────────────────────
+// Direct iframe embed — no dependency on TikTok's embed.js at all.
+// embed.js only processes blockquotes present at script-load time,
+// making it useless for lazy-injected cards. The /embed/v2/ URL
+// works for every card immediately, no script required.
 function buildCard(card, index) {
   const article = document.createElement('article');
   article.className = 'card';
   article.dataset.tags = card.tags.join(' ');
   article.style.animationDelay = ((index % BATCH) * 0.04) + 's';
 
+  const src = 'https://www.tiktok.com/embed/v2/' + card.id + '?lang=en';
+
   article.innerHTML =
     '<div class="video-wrap">' +
-      '<blockquote class="tiktok-embed"' +
-        ' cite="https://www.tiktok.com/@' + card.handle + '/video/' + card.id + '"' +
-        ' data-video-id="' + card.id + '"' +
-        ' style="max-width:605px;min-width:325px;">' +
-        '<section></section>' +
-      '</blockquote>' +
+      '<iframe' +
+        ' src="' + src + '"' +
+        ' allowfullscreen' +
+        ' allow="encrypted-media; fullscreen; autoplay"' +
+        ' loading="lazy"' +
+        ' frameborder="0"' +
+        ' scrolling="no">' +
+      '</iframe>' +
     '</div>' +
     '<div class="card-meta">' +
       '<span class="video-title">' + escHtml(card.title) + '</span>' +
