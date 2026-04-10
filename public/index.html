@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FeedDrop — Curated TikToks</title>
+  <title>FeedDrop</title>
   <meta name="description" content="The best TikTok videos, hand-picked daily." />
   <meta property="og:title" content="FeedDrop — Curated TikToks" />
   <meta property="og:description" content="The best TikTok videos, hand-picked daily." />
@@ -23,7 +23,7 @@
   <header>
     <div class="logo-wrap">
       <h1 class="logo">FeedDrop</h1>
-      <span class="tagline">Curated daily</span>
+      <span class="tagline"> Abuzar Moradi</span>
     </div>
     <span class="badge">TikTok Feed</span>
   </header>
@@ -1046,7 +1046,7 @@
     <button class="reset-btn" onclick="resetFilters()">Clear filters</button>
   </div>
 
-  <footer>FeedDrop &mdash; &copy; 2025</footer>
+  <footer>FeedDrop &mdash; &copy; 2026</footer>
 
   <script async src="https://www.tiktok.com/embed.js"></script>
   <script>
@@ -1092,56 +1092,10 @@
 
     const state = { tag: 'all' };
 
-    // =========================
-    // LAZY LOADING ADDITION
-    // =========================
-    let visibleCount = 0;
-    const BATCH_SIZE = 12;
-
-    function initLazyLoad() {
-      const cards = document.querySelectorAll('#feed .card');
-      cards.forEach((c, i) => {
-        c.style.display = 'none';
-        if (i < BATCH_SIZE) {
-          c.style.display = '';
-          visibleCount++;
-        }
-      });
-    }
-
-    function loadMore() {
-      const cards = document.querySelectorAll('#feed .card');
-      let loaded = 0;
-      for (let i = visibleCount; i < cards.length && loaded < BATCH_SIZE; i++) {
-        if (cards[i].style.display === 'none') {
-          cards[i].style.display = '';
-          loaded++;
-        }
-      }
-      visibleCount += loaded;
-    }
-
-    const sentinel = document.createElement('div');
-    sentinel.id = 'scrollSentinel';
-    document.body.appendChild(sentinel);
-
-    const observer = new IntersectionObserver(function (entries) {
-      if (entries[0].isIntersecting) {
-        loadMore();
-      }
-    });
-
-    observer.observe(sentinel);
-
-    window.addEventListener('load', initLazyLoad);
-    // =========================
-
     function applyFilters() {
       const cards = document.querySelectorAll('#feed .card');
       let visible = 0;
-      visibleCount = 0;
-
-      cards.forEach(function (card, index) {
+      cards.forEach(function (card) {
         let match = false;
         if (state.tag === 'all') {
           match = true;
@@ -1150,14 +1104,8 @@
           match = tags.includes(state.tag);
         }
         
-        if (match && visible < BATCH_SIZE) {
-          card.style.display = '';
-          visibleCount++;
-        } else {
-          card.style.display = 'none';
-        }
-
-        if (match && visible < BATCH_SIZE) {
+        card.style.display = match ? '' : 'none';
+        if (match) {
           card.style.animationDelay = (visible * 0.035) + 's';
           card.classList.remove('pop');
           void card.offsetWidth;
@@ -1165,9 +1113,7 @@
           visible++;
         }
       });
-
       document.getElementById('emptyState').classList.toggle('visible', visible === 0);
-
       const s = document.getElementById('filterStatus');
       if (state.tag === 'all') {
         s.classList.remove('visible');
@@ -1181,6 +1127,6 @@
     function resetFilters() {
       document.querySelector('.chip[data-value="all"]').click();
     }
-</script>
+  </script>
 </body>
 </html>
