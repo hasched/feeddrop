@@ -1,23 +1,21 @@
 /* ─────────────────────────────────────────────────────────────
    FeedDrop — app.js
    • Loads cards.json
-   • Renders 12 cards at a time, lazy-loads on scroll
-   • Filter chips (tag) + search bar (title, handle, tags) combined
+   • 20 cards per page with numbered pagination
+   • Filter chips (tag) + search bar (title, handle, tags)
 ───────────────────────────────────────────────────────────── */
 
-const BATCH     = 12;
-const LOOKAHEAD = 400; // px before sentinel triggers next load
+const PAGE_SIZE = 20;
 
 let allCards = [];
 let filtered = [];
-let rendered = 0;
-let loading  = false;
+let currentPage = 1;
 
 const feed       = document.getElementById('feed');
-const sentinel   = document.getElementById('sentinel');
 const emptyState = document.getElementById('emptyState');
 const statusEl   = document.getElementById('filterStatus');
 const searchEl   = document.getElementById('searchInput');
+const pagination = document.getElementById('pagination');
 
 const state = { tag: 'all', query: '' };
 
@@ -27,35 +25,33 @@ fetch('/cards.json')
   .then(data => {
     allCards = data;
     applyFilters();
-    setupScrollObserver();
   })
   .catch(err => console.error('Failed to load cards.json:', err));
 
-// ── Render next batch ──────────────────────────────────────
-function renderBatch() {
-  if (loading || rendered >= filtered.length) return;
-  loading = true;
+// ── Render current page ────────────────────────────────────
+function renderPage() {
+  feed.innerHTML = '';
 
-  const end  = Math.min(rendered + BATCH, filtered.length);
+  const start = (currentPage - 1) * PAGE_SIZE;
+  const end   = Math.min(start + PAGE_SIZE, filtered.length);
+  const slice = filtered.slice(start, end);
+
   const frag = document.createDocumentFragment();
-
-  for (let i = rendered; i < end; i++) {
-    frag.appendChild(buildCard(filtered[i], i));
-  }
-
+  slice.forEach((card, i) => frag.appendChild(buildCard(card, i)));
   feed.appendChild(frag);
-  rendered = end;
-  loading  = false;
+
+  renderPagination();
+
+  // Scroll to top of feed smoothly
+  feed.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 // ── Build card DOM node ────────────────────────────────────
-// Uses TikTok's /embed/v2/ URL directly — no embed.js needed,
-// works for every card regardless of when it's injected.
 function buildCard(card, index) {
   const article = document.createElement('article');
   article.className = 'card';
   article.dataset.tags = card.tags.join(' ');
-  article.style.animationDelay = ((index % BATCH) * 0.04) + 's';
+  article.style.animationDelay = (index * 0.04) + 's';
 
   const src = 'https://www.tiktok.com/embed/v2/' + card.id + '?lang=en';
 
@@ -86,36 +82,79 @@ function esc(str) {
     .replace(/"/g, '&quot;');
 }
 
-// ── Scroll observer ────────────────────────────────────────
-function setupScrollObserver() {
-  const obs = new IntersectionObserver(
-    entries => { if (entries[0].isIntersecting) renderBatch(); },
-    { rootMargin: LOOKAHEAD + 'px' }
-  );
-  obs.observe(sentinel);
+// ── Render pagination controls ─────────────────────────────
+function renderPagination() {
+  pagination.innerHTML = '';
+  const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
+  if (totalPages <= 1) return;
+
+  function btn(label, page, disabled, active) {
+    const b = document.createElement('button');
+    b.className = 'page-btn' + (active ? ' active' : '') + (disabled ? ' disabled' : '');
+    b.textContent = label;
+    b.disabled = disabled;
+    if (!disabled && !active) {
+      b.addEventListener('click', () => goToPage(page));
+    }
+    return b;
+  }
+
+  // Prev
+  pagination.appendChild(btn('← Prev', currentPage - 1, currentPage === 1, false));
+
+  // Page numbers with ellipsis
+  const pages = getPageNumbers(currentPage, totalPages);
+  pages.forEach(p => {
+    if (p === '...') {
+      const span = document.createElement('span');
+      span.className = 'page-ellipsis';
+      span.textContent = '…';
+      pagination.appendChild(span);
+    } else {
+      pagination.appendChild(btn(p, p, false, p === currentPage));
+    }
+  });
+
+  // Next
+  pagination.appendChild(btn('Next →', currentPage + 1, currentPage === totalPages, false));
 }
 
-// ── Apply filter + search, rebuild DOM ────────────────────
+// Always show: first, last, current, and 1 either side of current
+function getPageNumbers(current, total) {
+  const pages = new Set([1, total, current, current - 1, current + 1].filter(p => p >= 1 && p <= total));
+  const sorted = [...pages].sort((a, b) => a - b);
+  const result = [];
+  let prev = null;
+  for (const p of sorted) {
+    if (prev !== null && p - prev > 1) result.push('...');
+    result.push(p);
+    prev = p;
+  }
+  return result;
+}
+
+function goToPage(page) {
+  currentPage = page;
+  renderPage();
+}
+
+// ── Apply filter + search ──────────────────────────────────
 function applyFilters() {
   const q = state.query.toLowerCase().trim();
 
   filtered = allCards.filter(card => {
-    // chip filter
     const tagMatch = state.tag === 'all' || card.tags.includes(state.tag);
-    // search: title, handle, or any tag
-    const qMatch = !q
+    const qMatch   = !q
       || card.title.toLowerCase().includes(q)
       || card.handle.toLowerCase().includes(q)
       || card.tags.some(t => t.toLowerCase().includes(q));
     return tagMatch && qMatch;
   });
 
-  feed.innerHTML = '';
-  rendered = 0;
-
+  currentPage = 1; // always reset to page 1 on filter change
   emptyState.classList.toggle('visible', filtered.length === 0);
 
-  // status pill
+  // Status pill
   const parts = [];
   if (state.tag !== 'all') parts.push(state.tag.charAt(0).toUpperCase() + state.tag.slice(1));
   if (q) parts.push('"' + q + '"');
@@ -128,10 +167,10 @@ function applyFilters() {
     statusEl.classList.add('visible');
   }
 
-  renderBatch();
+  renderPage();
 }
 
-// ── Filter toggle (open/close panel) ──────────────────────
+// ── Filter toggle ──────────────────────────────────────────
 const toggleBtn = document.getElementById('filterToggle');
 const panel     = document.getElementById('filterPanel');
 
@@ -152,7 +191,7 @@ document.querySelectorAll('.chip').forEach(chip => {
   });
 });
 
-// ── Search input ───────────────────────────────────────────
+// ── Search ─────────────────────────────────────────────────
 let searchTimer;
 searchEl.addEventListener('input', () => {
   clearTimeout(searchTimer);
@@ -170,7 +209,7 @@ searchEl.addEventListener('keydown', e => {
   }
 });
 
-// ── Reset (called by empty-state button) ──────────────────
+// ── Reset ──────────────────────────────────────────────────
 window.resetFilters = function () {
   state.tag   = 'all';
   state.query = '';

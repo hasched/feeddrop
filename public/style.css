@@ -112,8 +112,8 @@ header {
 /* ── SEARCH BAR ── */
 .search-wrap {
   position: relative;
-  flex: 1;
-  max-width: 340px;
+  width: 100%;
+  max-width: 520px;
 }
 .search-icon {
   position: absolute;
@@ -247,8 +247,56 @@ header {
 .handle { font-size: clamp(11px,0.9vw,13px); font-weight: 400; color: var(--accent); letter-spacing: 0.01em; text-decoration: none; transition: color 0.2s; width: fit-content; }
 .handle:hover { color: var(--accent2); }
 
-/* ── SENTINEL ── */
-#sentinel { height: 1px; }
+/* ── PAGINATION ── */
+.pagination {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 20px 20px 60px;
+  flex-wrap: wrap;
+}
+
+.page-btn {
+  min-width: 40px;
+  height: 40px;
+  padding: 0 14px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border-mid);
+  border-radius: 10px;
+  color: var(--muted);
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s;
+  white-space: nowrap;
+}
+.page-btn:hover:not(.disabled):not(.active) {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.2);
+  color: var(--text);
+}
+.page-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  box-shadow: 0 0 20px rgba(255,45,85,0.35);
+  cursor: default;
+}
+.page-btn.disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+.page-ellipsis {
+  color: var(--muted);
+  font-size: 14px;
+  padding: 0 4px;
+  line-height: 40px;
+}
 
 /* ── EMPTY STATE ── */
 .empty-state { display: none; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 80px 20px; color: var(--muted); text-align: center; position: relative; z-index: 10; }
